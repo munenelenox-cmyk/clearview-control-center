@@ -88,10 +88,10 @@ function OrgSettings({ canEdit }: { canEdit: boolean }) {
     setBusy(true);
     const payload: Record<string, string | null> = {};
     for (const [k] of ORG_FIELDS) payload[k] = v[k]?.trim() ? v[k].trim() : null;
-    if (!payload.name) payload.name = "L.E.A.P. Generation CBO";
-    const { error } = await supabase.from("org_settings").update(payload).eq("id", 1);
+    if (!payload["name"]) payload["name"] = "L.E.A.P. Generation CBO";
+    const { error } = await supabase.from("org_settings").update(payload as { name: string }).eq("id", 1);
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["org_settings"] });
     toast.success("Organisation details saved");
   }
@@ -152,7 +152,7 @@ function ProfileSettings() {
       .update({ full_name: name.trim() || null, phone: phone.trim() || null, title: title.trim() || null })
       .eq("id", me.id);
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["current-user"] });
     qc.invalidateQueries({ queryKey: ["profiles"] });
     toast.success("Profile updated");
@@ -185,12 +185,12 @@ function SecuritySettings() {
 
   async function save(e: FormEvent) {
     e.preventDefault();
-    if (next.length < 8) return toast.error("Use at least 8 characters");
-    if (next !== confirm) return toast.error("New passwords don't match");
+    if (next.length < 8) { toast.error("Use at least 8 characters"); return; }
+    if (next !== confirm) { toast.error("New passwords don't match"); return; }
     setBusy(true);
     const { error } = await supabase.auth.updateUser({ password: next, current_password: current });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setCurrent(""); setNext(""); setConfirm("");
     toast.success("Password changed");
   }

@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LOGO_URL } from "@/lib/brand";
 
-type Search = { redirect?: string };
+type Search = { redirect?: string | undefined };
 
 function safePath(p?: string) {
   if (!p) return "/dashboard";
@@ -25,7 +25,7 @@ function safePath(p?: string) {
 
 export const Route = createFileRoute("/auth")({
   validateSearch: (s: Record<string, unknown>): Search => ({
-    redirect: typeof s.redirect === "string" ? s.redirect : undefined,
+    redirect: typeof s["redirect"] === "string" ? s["redirect"] : undefined,
   }),
   head: () => ({
     meta: [
@@ -70,7 +70,7 @@ function AuthPage() {
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     navigate({ to: target, replace: true });
   }
 
@@ -83,8 +83,8 @@ function AuthPage() {
       options: { emailRedirectTo: window.location.origin + "/dashboard", data: { full_name: name } },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
-    if (data.session) return navigate({ to: target, replace: true });
+    if (error) { toast.error(error.message); return; }
+    if (data.session) { navigate({ to: target, replace: true }); return; }
     setSent(`We've sent a confirmation link to ${email}. Open it to activate your account.`);
   }
 
@@ -95,7 +95,7 @@ function AuthPage() {
       redirectTo: `${window.location.origin}/reset-password`,
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setSent(`If an account exists for ${email}, a password reset link is on its way.`);
   }
 
@@ -104,7 +104,7 @@ function AuthPage() {
     const res = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/auth" });
     if (res.error) {
       setBusy(false);
-      return toast.error(res.error.message);
+      { toast.error(res.error.message); return; }
     }
     if (res.redirected) return;
     navigate({ to: target, replace: true });
