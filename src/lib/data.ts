@@ -42,7 +42,7 @@ export function useRows<T extends TableName>(table: T) {
 export function useSaveRow<T extends TableName>(table: T, label = "Record") {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (values: Partial<Row<T>> & { id?: string | number }) => {
+    mutationFn: async (values: Record<string, unknown> & { id?: string | number | undefined }) => {
       const { id, ...rest } = values;
       const res = id
         ? await db.from(table).update(rest).eq("id", id)

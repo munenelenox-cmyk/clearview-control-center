@@ -133,7 +133,7 @@ function Dashboard() {
   );
 }
 
-function Detail({ label, value }: { label: string; value?: string | null }) {
+function Detail({ label, value }: { label: string; value?: string | null | undefined }) {
   return (
     <div>
       <dt className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">{label}</dt>
