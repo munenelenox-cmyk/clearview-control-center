@@ -8,6 +8,13 @@
       "when": 1792695973079,
       "tag": "0000_leap_dashboard_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792697123341,
+      "tag": "0001_public_website_content",
+      "breakpoints": true
     }
   ]
 }
