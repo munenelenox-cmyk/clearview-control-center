@@ -13,6 +13,13 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedActivitiesRouteImport } from './routes/_authenticated/activities'
+import { Route as AuthenticatedComplianceRouteImport } from './routes/_authenticated/compliance'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedDocumentsRouteImport } from './routes/_authenticated/documents'
+import { Route as AuthenticatedFinanceRouteImport } from './routes/_authenticated/finance'
+import { Route as AuthenticatedLeadershipRouteImport } from './routes/_authenticated/leadership'
+import { Route as AuthenticatedMeetingsRouteImport } from './routes/_authenticated/meetings'
 import { Route as AuthenticatedMembersRouteImport } from './routes/_authenticated/members'
 
 const IndexRoute = IndexRouteImport.update({
@@ -34,6 +41,41 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedActivitiesRoute = AuthenticatedActivitiesRouteImport.update({
+  id: '/activities',
+  path: '/activities',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedComplianceRoute = AuthenticatedComplianceRouteImport.update({
+  id: '/compliance',
+  path: '/compliance',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDocumentsRoute = AuthenticatedDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFinanceRoute = AuthenticatedFinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedLeadershipRoute = AuthenticatedLeadershipRouteImport.update({
+  id: '/leadership',
+  path: '/leadership',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMeetingsRoute = AuthenticatedMeetingsRouteImport.update({
+  id: '/meetings',
+  path: '/meetings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedMembersRoute = AuthenticatedMembersRouteImport.update({
   id: '/members',
   path: '/members',
@@ -44,12 +86,26 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/activities': typeof AuthenticatedActivitiesRoute
+  '/compliance': typeof AuthenticatedComplianceRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/documents': typeof AuthenticatedDocumentsRoute
+  '/finance': typeof AuthenticatedFinanceRoute
+  '/leadership': typeof AuthenticatedLeadershipRoute
+  '/meetings': typeof AuthenticatedMeetingsRoute
   '/members': typeof AuthenticatedMembersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/activities': typeof AuthenticatedActivitiesRoute
+  '/compliance': typeof AuthenticatedComplianceRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/documents': typeof AuthenticatedDocumentsRoute
+  '/finance': typeof AuthenticatedFinanceRoute
+  '/leadership': typeof AuthenticatedLeadershipRoute
+  '/meetings': typeof AuthenticatedMeetingsRoute
   '/members': typeof AuthenticatedMembersRoute
 }
 export interface FileRoutesById {
@@ -58,19 +114,55 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/activities': typeof AuthenticatedActivitiesRoute
+  '/_authenticated/compliance': typeof AuthenticatedComplianceRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/documents': typeof AuthenticatedDocumentsRoute
+  '/_authenticated/finance': typeof AuthenticatedFinanceRoute
+  '/_authenticated/leadership': typeof AuthenticatedLeadershipRoute
+  '/_authenticated/meetings': typeof AuthenticatedMeetingsRoute
   '/_authenticated/members': typeof AuthenticatedMembersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/reset-password' | '/members'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/activities'
+    | '/compliance'
+    | '/dashboard'
+    | '/documents'
+    | '/finance'
+    | '/leadership'
+    | '/meetings'
+    | '/members'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/reset-password' | '/members'
+  to:
+    | '/'
+    | '/auth'
+    | '/reset-password'
+    | '/activities'
+    | '/compliance'
+    | '/dashboard'
+    | '/documents'
+    | '/finance'
+    | '/leadership'
+    | '/meetings'
+    | '/members'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/reset-password'
+    | '/_authenticated/activities'
+    | '/_authenticated/compliance'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/documents'
+    | '/_authenticated/finance'
+    | '/_authenticated/leadership'
+    | '/_authenticated/meetings'
     | '/_authenticated/members'
   fileRoutesById: FileRoutesById
 }
@@ -111,6 +203,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/activities': {
+      id: '/_authenticated/activities'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof AuthenticatedActivitiesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/compliance': {
+      id: '/_authenticated/compliance'
+      path: '/compliance'
+      fullPath: '/compliance'
+      preLoaderRoute: typeof AuthenticatedComplianceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/documents': {
+      id: '/_authenticated/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof AuthenticatedDocumentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/finance': {
+      id: '/_authenticated/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof AuthenticatedFinanceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/leadership': {
+      id: '/_authenticated/leadership'
+      path: '/leadership'
+      fullPath: '/leadership'
+      preLoaderRoute: typeof AuthenticatedLeadershipRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/meetings': {
+      id: '/_authenticated/meetings'
+      path: '/meetings'
+      fullPath: '/meetings'
+      preLoaderRoute: typeof AuthenticatedMeetingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/members': {
       id: '/_authenticated/members'
       path: '/members'
@@ -122,10 +263,24 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedActivitiesRoute: typeof AuthenticatedActivitiesRoute
+  AuthenticatedComplianceRoute: typeof AuthenticatedComplianceRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedDocumentsRoute: typeof AuthenticatedDocumentsRoute
+  AuthenticatedFinanceRoute: typeof AuthenticatedFinanceRoute
+  AuthenticatedLeadershipRoute: typeof AuthenticatedLeadershipRoute
+  AuthenticatedMeetingsRoute: typeof AuthenticatedMeetingsRoute
   AuthenticatedMembersRoute: typeof AuthenticatedMembersRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedActivitiesRoute: AuthenticatedActivitiesRoute,
+  AuthenticatedComplianceRoute: AuthenticatedComplianceRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedDocumentsRoute: AuthenticatedDocumentsRoute,
+  AuthenticatedFinanceRoute: AuthenticatedFinanceRoute,
+  AuthenticatedLeadershipRoute: AuthenticatedLeadershipRoute,
+  AuthenticatedMeetingsRoute: AuthenticatedMeetingsRoute,
   AuthenticatedMembersRoute: AuthenticatedMembersRoute,
 }
 

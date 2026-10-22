@@ -20,7 +20,7 @@ export const Route = createFileRoute("/_authenticated/members")({
   component: MembersPage,
 });
 
-export const POSITIONS = [
+const POSITIONS = [
   "Chairperson",
   "Vice Chairperson",
   "Secretary",
