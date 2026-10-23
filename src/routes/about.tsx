@@ -8,7 +8,7 @@ export const Route = createFileRoute("/about")({
   component: About,
 });
 
-const LEADERS = [
+const LEADERS: [string, string][] = [
   ["Lenox Munene", "Chairperson"],
   ["Tonny Brian Mutugi", "Vice Chairperson"],
   ["Bonface Muriithi", "Secretary"],

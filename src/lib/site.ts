@@ -36,7 +36,7 @@ export function useSiteContent<T extends object>(key: string, defaults: T) {
       const { data } = await supabase.from("site_content").select("data").eq("key", key).maybeSingle();
       return { ...defaults, ...((data?.data as Partial<T> | null) ?? {}) };
     },
-    placeholderData: defaults,
+    placeholderData: () => defaults as never,
   });
 }
 
